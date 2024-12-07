@@ -11,10 +11,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(GCC_COMPILER gcc)
 
 # This condition will be true if ENABLE_FEATURE was set to ON
-if(CMAKE_BUILD_TYPE=Release)
-    message("ENABLE_FEATURE is enabled!")
-    set(CMAKE_BUILD_TYPE Debug)
-    # You can add logic here that depends on ENABLE_FEATURE
+message("                   CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
+
+
+# Check for custom variables passed via EXTRA_OECMAKE
+if(ENABLE_FEATURE)
+    message(STATUS "                ENABLE_FEATURE is ON: Additional feature will be enabled")
+    add_definitions(-DENABLE_FEATURE)
+else()
+    message(STATUS "                ENABLE_FEATURE is OFF: Default behavior")
 endif()
+
 
 add_executable(hello_yocto_from_git hello_yocto.c) 
